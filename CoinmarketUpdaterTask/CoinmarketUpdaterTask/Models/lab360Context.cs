@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace CoinmarketUpdaterTask.Models
 {
@@ -21,9 +23,14 @@ namespace CoinmarketUpdaterTask.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-TJRUI04;Database=lab360;Trusted_Connection=True;");
-            }
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory()) // <== compile failing here
+                    .AddJsonFile("appsettings.json");
+
+                var configuration = builder.Build();
+
+                var connectionString = configuration.GetConnectionString("Database");
+                optionsBuilder.UseSqlServer(connectionString);            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
