@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace CoinmarketUpdaterTask
 {
@@ -26,11 +27,14 @@ namespace CoinmarketUpdaterTask
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
-            var list = apiQueryEngine.Query();
-            _dbManager.SaveAll(list);
-
+            while (true)
+            {
+                var list = apiQueryEngine.Query();
+                _dbManager.PurgeAll();
+                _dbManager.SaveAll(list);
+                Console.WriteLine("Saved/Updated coinmarket data");
+                Thread.Sleep(5 * 60 * 100);
+            }
         }
     }
 }

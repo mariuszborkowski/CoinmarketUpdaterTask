@@ -24,7 +24,7 @@ namespace CoinmarketUpdaterTask.Models
             if (!optionsBuilder.IsConfigured)
             {
                 var builder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory()) // <== compile failing here
+                    .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json");
 
                 var configuration = builder.Build();

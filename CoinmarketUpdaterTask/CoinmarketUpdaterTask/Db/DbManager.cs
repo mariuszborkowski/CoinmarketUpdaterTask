@@ -40,7 +40,7 @@ namespace CoinmarketUpdaterTask.Db
         {
             using (var context = new lab360Context())
             {
-                context.Database.ExecuteSqlRaw("TRUNCATE TABLE [TableName]");
+                context.Database.ExecuteSqlRaw("TRUNCATE TABLE Cryptocurrency");
             }
         }
     }
