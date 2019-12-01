@@ -14,6 +14,7 @@ namespace CoinmarketUpdaterTask.Db
         {
             var cryptocurencies = list.Select(x => new Cryptocurrency
             {
+                CryptocurrencyId = x.Id,
                 CryptocurrencyName = x.Name,
                 CryptocurrencySymbol = x.Symbol,
                 CryptocurrencyRank = x.Rank,
@@ -29,19 +30,15 @@ namespace CoinmarketUpdaterTask.Db
                 LastUpdateTime = x.LastUpdated
             }).ToList();
 
-            using (var context = new lab360Context())
-            {
-                context.AddRange(cryptocurencies);
-                context.SaveChanges();
-            }
+            using var context = new lab360Context();
+            context.AddRange(cryptocurencies);
+            context.SaveChanges();
         }
 
         public void PurgeAll()
         {
-            using (var context = new lab360Context())
-            {
-                context.Database.ExecuteSqlRaw("TRUNCATE TABLE Cryptocurrency");
-            }
+            using var context = new lab360Context();
+            context.Database.ExecuteSqlRaw("TRUNCATE TABLE Cryptocurrency");
         }
     }
 }

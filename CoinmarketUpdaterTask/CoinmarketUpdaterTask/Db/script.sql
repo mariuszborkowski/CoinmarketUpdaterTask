@@ -1,7 +1,7 @@
 ﻿USE [lab360]
 GO
 
-/****** Object:  Table [dbo].[Cryptocurrency]    Script Date: 01.12.2019 14:30:25 ******/
+/****** Object:  Table [dbo].[Cryptocurrency]    Script Date: 01.12.2019 17:59:59 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,6 +10,7 @@ GO
 
 CREATE TABLE [dbo].[Cryptocurrency](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CryptocurrencyId] [int] NOT NULL,
 	[CryptocurrencyName] [nvarchar](255) NULL,
 	[CryptocurrencySymbol] [nvarchar](255) NULL,
 	[CryptocurrencyRank] [nvarchar](255) NULL,

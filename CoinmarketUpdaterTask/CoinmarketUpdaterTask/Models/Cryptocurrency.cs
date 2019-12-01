@@ -6,6 +6,8 @@ namespace CoinmarketUpdaterTask.Models
     public partial class Cryptocurrency
     {
         public int Id { get; set; }
+
+        public int CryptocurrencyId { get; set; }
         public string CryptocurrencyName { get; set; }
         public string CryptocurrencySymbol { get; set; }
         public string CryptocurrencyRank { get; set; }
